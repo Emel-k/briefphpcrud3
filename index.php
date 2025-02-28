@@ -17,6 +17,33 @@ $produits = $produitObj->lister();
     <title>Document</title>
 </head>
 <body>
-
+<?php if (!empty($produits)):  ?>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- PHP -->
+        <?php foreach ($produits as $p): ?>
+            <tr>
+                <td><?= htmlspecialchars($p['id']) ?></td>
+                <td><?= htmlspecialchars($p['nom']) ?></td>
+                <td><?= htmlspecialchars($p['prix']) ?></td>
+                <td><?= htmlspecialchars($p['stock']) ?></td>
+                <td> <a href="edit.php=<?= $p['id']?>">Modifier</a></td>
+                <td> <a href="delete.php?id=<?= $p['id']?>">Supprimer</a></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <button><a href="add.php?id=<?= $p['id'] ?>">Ajouter un nouveau produit</a></button>
+<?php else: ?>
+    <p>Aucun Produit</p>
+<?php endif; ?>
 </body>
 </html>
