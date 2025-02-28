@@ -1,3 +1,12 @@
+<?php
+require_once 'Produit.php';
+
+$produitObj = new Produit();
+
+//Liste des produits
+$produits = $produitObj->lister();
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
