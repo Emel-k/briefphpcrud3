@@ -1,4 +1,34 @@
 <?php
+
+require_once 'Produit.php';
+//creation un nouveau objet de la classe produit
+
+// Mon Code qui marche pas
+//$produit = new Produit();
+//
+//
+//$nom = isset($_POST['nom']) ? trim($_POST['nom']) : "";
+//$prix = isset($_POST['prix']) ? trim($_POST['prix']) : "";
+//$stock = isset($_POST['stock']) ? trim($_POST['stock']) : "";
+//
+//$produit->add($nom, $prix, $stock);
+//header('location: index.php');
+
+//----- lui de chatgtp
+
+if (is_numeric($prix)) {
+    $prix = (float) $prix;  // Convertir en float
+} else {
+    $error = "Le prix doit être un nombre valide.";
+}
+
+// Si aucune erreur, ajouter le produit
+if (!isset($error)) {
+    $produitObj->add($nom, $prix, $stock);
+    header('Location: index.php'); // Rediriger vers la page des produits après ajout
+    exit;
+}
+
 ?>
 
 <!doctype html>
