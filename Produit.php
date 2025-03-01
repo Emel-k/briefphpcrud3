@@ -1,6 +1,6 @@
 <?php
 
-require 'Database.php';
+require 'database.php';
 class Produit
 {
     // propriété privée
@@ -40,18 +40,17 @@ class Produit
 
     public function delete()
     {
-        // Requête préparée
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
             $stmt = $this->pdo->prepare('DELETE from produits where id = ?');
-            if ($stmt->execute([$id])) {
-                return true;
-            } else {
-                return false;
-            }
-
-        }
+            return $stmt->execute([$id]);
     }
+
+    public function modif(string $nom, float $prix, int $stock)
+    {
+        // Mise à jour du produit dans la base de données
+        $stmt = $pdo->prepare('UPDATE produits SET nom = ?, prix = ?, stock = ? WHERE id = ?');
+        $stmt->execute([$nom, $prix, $stock, $id]);
+    }
+
 }
 ////creation un nouveau objet de la classe produit
 $produit = new Produit();

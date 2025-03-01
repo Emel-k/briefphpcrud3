@@ -1,6 +1,7 @@
 <?php
 require_once 'Produit.php';
 
+
 $produitObj = new Produit();
 
 //Liste des produits
@@ -35,7 +36,7 @@ $produits = $produitObj->lister();
                 <td><?= htmlspecialchars($p['nom']) ?></td>
                 <td><?= htmlspecialchars($p['prix']) ?></td>
                 <td><?= htmlspecialchars($p['stock']) ?></td>
-                <td> <a href="edit.php=<?= $p['id']?>">Modifier</a></td>
+                <td> <a href="modif.php?id=<?= $p['id']?>">Modifier</a></td>
                 <td> <a href="delete.php?id=<?= $p['id']?>">Supprimer</a></td>
             </tr>
         <?php endforeach; ?>

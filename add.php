@@ -3,31 +3,33 @@
 require_once 'Produit.php';
 //creation un nouveau objet de la classe produit
 
-// Mon Code qui marche pas
-//$produit = new Produit();
-//
-//
-//$nom = isset($_POST['nom']) ? trim($_POST['nom']) : "";
-//$prix = isset($_POST['prix']) ? trim($_POST['prix']) : "";
-//$stock = isset($_POST['stock']) ? trim($_POST['stock']) : "";
-//
-//$produit->add($nom, $prix, $stock);
-//header('location: index.php');
+ //Mon Code qui marche
+$produit = new Produit();
 
-//----- lui de chatgtp
+// On vérifie si le champ 'nom' existe dans le formulaire (via POST) et on le récupère
+$nom = isset($_POST['nom']) ? trim($_POST['nom']) : "";
 
-if (is_numeric($prix)) {
-    $prix = (float) $prix;  // Convertir en float
-} else {
-    $error = "Le prix doit être un nombre valide.";
+// On vérifie si le champ 'prix' existe dans le formulaire (via POST) et on le récupère
+$prix = isset($_POST['prix']) ? floatval($_POST['prix']) : 0.0;
+
+// On vérifie si le champ 'stock' existe dans le formulaire (via POST) et on le récupère
+$stock = isset($_POST['stock']) ? intval($_POST['stock']) : 0;
+
+
+//Ici, on vérifie si les trois variables $nom, $prix, et $stock ne sont pas vides
+if(!empty($nom) && !empty($prix) && !empty($stock)){
+
+    // Si tous les champs sont remplis, on appelle la méthode 'add' de l'objet $produit
+    // pour ajouter un nouveau produit à la base de données avec les valeurs fournies.
+    $produit->add($nom, $prix, $stock);
+
+    // Après l'ajout, on redirige l'utilisateur vers la page 'index.php' pour actualiser l'affichage des produits
+    header('location: index.php');
+
+
+    exit();
 }
 
-// Si aucune erreur, ajouter le produit
-if (!isset($error)) {
-    $produitObj->add($nom, $prix, $stock);
-    header('Location: index.php'); // Rediriger vers la page des produits après ajout
-    exit;
-}
 
 ?>
 
@@ -41,7 +43,7 @@ if (!isset($error)) {
     <title>Document</title>
 </head>
 <body>
-<form action="add.php" method="post">
+<form action="add.php" method="post" autocomplete="off">
     <label for="nom"> Nom</label>
     <input type="text" id="nom" name="nom" required> <br>
     <label for="prix"> Prix</label>

@@ -5,9 +5,9 @@
     * Simplidier l'utilisation de POO
 
  */
-class database
+class Database
 {
-    //Propriété privée - instance unique de la connexion
+    //Propriété privée — instance unique de la connexion
     private static $instance = null;
 
     //pour stocker l'objet $pdo
@@ -17,10 +17,10 @@ class database
     private function __construct()
     {
         //Configuration de la base de données
-        $host = "localhost";// mettre le port si je suis sur le macbook
+        $host = "localhost:3306";// mettre le port si je suis sur le macbook
         $dbname = "briefphp";
         $user = "root";
-        $pass = "";
+        $pass = "root";
 
         try{
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
